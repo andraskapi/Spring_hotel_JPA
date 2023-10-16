@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Room</title>
+</head>
+<body>
+<a th:href="@{/home}">Home</a>
+
+<table>
+    <thead>
+    <tr>
+        <td>Room Number</td>
+        <td>Max Capacity</td>
+        <td>Price Per Night</td>
+        <td>Has Jakuzzi</td>
+        <td>Has Sauna</td>
+    </tr>
+    </thead>
+    <tr>
+        <td th:text="${room.roomNumber}"></td>
+        <td th:text="${room.maxCapacity}"></td>
+        <td th:text="${room.pricePerNight}"></td>
+        <td th:text="${room.hasJakuzzi}"></td>
+        <td th:text="${room.hasSauna}"></td>
+
+    </tr>
+</table>
+</body>
+</html>

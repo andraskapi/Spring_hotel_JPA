@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Booking Date</title>
+</head>
+<body>
+<form th:action="@{/booking/new}" method="get">
+
+  <input type="date" placeholder="e.g. 1999-01-01" th:field="*{booking.checkIn}">
+  <input type="date" placeholder="e.g. 1999-01-01" th:field="*{booking.checkOut}">
+  <input type="number" min="1" placeholder="e.g. 1" th:field="*{booking.numberOfGuest}">
+
+  <button type="submit">OK</button>
+</form>
+
+</body>
+</html>

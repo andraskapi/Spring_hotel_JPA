@@ -1,54 +1,67 @@
 package hu.progmataic.hotel_jpa.service;
 
 import hu.progmataic.hotel_jpa.model.Booking;
-import hu.progmataic.hotel_jpa.repository.BookingRepository;
+import hu.progmataic.hotel_jpa.repository.BookingRepo;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
 public class BookingService {
-    private final BookingRepository bookingRepository;
+    private final BookingRepo bookingRepository;
 
-@Autowired
-    public BookingService(BookingRepository bookingRepository) {
+    @Autowired
+    public BookingService(BookingRepo bookingRepository) {
         this.bookingRepository = bookingRepository;
     }
 
-    public List<Booking> getAllBooking(){
+    public List<Booking> getAllBooking() {
         return bookingRepository.findAll();
     }
 
-    public Booking createBooking (Booking booking){
+    public Booking getBookingById(Integer id) {
+        return bookingRepository.findById(id).orElse(null);
+    }
+
+    public Booking createBooking(Booking booking) {
         return bookingRepository.save(booking);
     }
 
-    public void deleteBooking (Integer id){
-        bookingRepository.deleteById(id);
+    @Transactional
+    public void deleteBooking(Integer id) {
+        bookingRepository.removeBookingById(id);
     }
 
-    public Booking updateBooking(Integer id, Booking booking){
+    public Booking updateBooking(Integer id, Booking booking) {
 
-    Booking bookingToBeUpdated = bookingRepository.findById(id).get();
+        Booking bookingToBeUpdated = getBookingById(id);
 
-    if (booking.getRoom_id() != null){
-        bookingToBeUpdated.setRoom_id(booking.getRoom_id());
-    }
-    if (booking.getGuest_id() != null){
-        bookingToBeUpdated.setGuest_id(booking.getGuest_id());
-    }
-    if (booking.getCheck_in() != null){
-        bookingToBeUpdated.setCheck_in(booking.getCheck_in());
-    }
-    if (booking.getCheck_out() != null){
-        bookingToBeUpdated.setCheck_out(booking.getCheck_out());
-    }
-    if (booking.getNumber_of_guest() != null){
-        bookingToBeUpdated.setNumber_of_guest(booking.getNumber_of_guest());
+        if (booking.getRoom() != null) {
+            bookingToBeUpdated.setRoom(booking.getRoom());
+        }
+        if (booking.getGuest() != null) {
+            bookingToBeUpdated.setGuest(booking.getGuest());
+        }
+        if (booking.getCheckIn() != null) {
+            bookingToBeUpdated.setCheckIn(booking.getCheckIn());
+        }
+        if (booking.getCheckOut() != null) {
+            bookingToBeUpdated.setCheckOut(booking.getCheckOut());
+        }
+        if (booking.getNumberOfGuest() != null) {
+            bookingToBeUpdated.setNumberOfGuest(booking.getNumberOfGuest());
+        }
+
+        return bookingRepository.save(bookingToBeUpdated);
+
+
     }
 
-    return bookingRepository.save(bookingToBeUpdated);
+    public List<Booking> betweenDates(LocalDate checkIn, LocalDate checkOut) {
+        return bookingRepository.findAllByCheckInIsBetweenOrCheckOutIsBetween(checkIn, checkOut, checkIn, checkOut);
 
 
     }

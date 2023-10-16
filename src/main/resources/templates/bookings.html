@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Booking</title>
+</head>
+<body>
+<a th:href="@{/home}">Home</a>
+<table>
+    <thead>
+    <tr>
+        <td>Check in</td>
+        <td>Check out</td>
+        <td>Number of Guest</td>
+        <td>Guest</td>
+        <td>Room</td>
+        <td>Guest ID</td>
+        <td>Room ID</td>
+    </tr>
+    </thead>
+    <tr th:each="booking : ${bookings}" >
+        <td th:text="${booking.checkIn}"></td>
+        <td th:text="${booking.checkOut}"></td>
+        <td th:text="${booking.numberOfGuest}"></td>
+        <td th:text="${booking.guest}"></td>
+        <td th:text="${booking.room}"></td>
+
+        <td>
+            <a th:href="@{'/guest/' + ${booking.guest.id}}">
+                <p th:text="${booking.guest.id}"></p>
+            </a>
+        </td>
+        <td>
+            <a th:href="@{'/room/' + ${booking.room.id}}">
+                <p th:text="${booking.room.id}"></p>
+            </a>
+        </td>
+        <td>
+            <form method="post" th:href="@{'/booking'}"
+        </td>
+
+
+    </tr>
+
+
+
+</table>
+
+<a th:href="@{/booking/new-date}">New Booking</a>
+</body>
+</html>

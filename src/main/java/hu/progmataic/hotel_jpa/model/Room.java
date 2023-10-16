@@ -1,24 +1,41 @@
 package hu.progmataic.hotel_jpa.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Room {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer max_capacity;
-    private Integer price_per_night;
-    private Boolean has_jakuzzi;
-    private Boolean has_sauna;
+    @Column (name = "room_number")
+    private Integer roomNumber;
+    @Column (name = "max_capacity")
+    private Integer maxCapacity;
+    @Column (name = "price_per_night")
+    private Integer pricePerNight;
+    @Column (name = "has_jakuzzi")
+    private Boolean hasJakuzzi;
+    @Column (name = "has_sauna")
+    private Boolean hasSauna;
 
-    public Room(Integer id, Integer max_capacity, Integer price_per_night, Boolean has_jakuzzi, Boolean has_sauna) {
+    @OneToMany(mappedBy = "room")
+    @JsonBackReference
+    private List<Booking> bookingList;
+
+    public Room(Integer id, Integer roomNumber, Integer maxCapacity, Integer pricePerNight, Boolean hasJakuzzi, Boolean hasSauna, List<Booking> bookingList) {
         this.id = id;
-        this.max_capacity = max_capacity;
-        this.price_per_night = price_per_night;
-        this.has_jakuzzi = has_jakuzzi;
-        this.has_sauna = has_sauna;
+        this.roomNumber = roomNumber;
+        this.maxCapacity = maxCapacity;
+        this.pricePerNight = pricePerNight;
+        this.hasJakuzzi = hasJakuzzi;
+        this.hasSauna = hasSauna;
+        this.bookingList = bookingList;
     }
 
     public Room() {
@@ -32,35 +49,64 @@ public class Room {
         this.id = id;
     }
 
-    public Integer getMax_capacity() {
-        return max_capacity;
+    public Integer getRoomNumber() {
+        return roomNumber;
     }
 
-    public void setMax_capacity(Integer max_capacity) {
-        this.max_capacity = max_capacity;
+    public void setRoomNumber(Integer roomNumber) {
+        this.roomNumber = roomNumber;
     }
 
-    public Integer getPrice_per_night() {
-        return price_per_night;
+    public Integer getMaxCapacity() {
+        return maxCapacity;
     }
 
-    public void setPrice_per_night(Integer price_per_night) {
-        this.price_per_night = price_per_night;
+    public void setMaxCapacity(Integer maxCapacity) {
+        this.maxCapacity = maxCapacity;
     }
 
-    public Boolean getHas_jakuzzi() {
-        return has_jakuzzi;
+    public Integer getPricePerNight() {
+        return pricePerNight;
     }
 
-    public void setHas_jakuzzi(Boolean has_jakuzzi) {
-        this.has_jakuzzi = has_jakuzzi;
+    public void setPricePerNight(Integer pricePerNight) {
+        this.pricePerNight = pricePerNight;
     }
 
-    public Boolean getHas_sauna() {
-        return has_sauna;
+    public Boolean getHasJakuzzi() {
+        return hasJakuzzi;
     }
 
-    public void setHas_sauna(Boolean has_sauna) {
-        this.has_sauna = has_sauna;
+    public void setHasJakuzzi(Boolean hasJakuzzi) {
+        this.hasJakuzzi = hasJakuzzi;
+    }
+
+    public Boolean getHasSauna() {
+        return hasSauna;
+    }
+
+    public void setHasSauna(Boolean hasSauna) {
+        this.hasSauna = hasSauna;
+    }
+
+    public List<Booking> getBookingList() {
+        return bookingList;
+    }
+
+    public void setBookingList(List<Booking> bookingList) {
+        this.bookingList = bookingList;
+    }
+
+    @Override
+    public String toString() {
+        return "Room{" +
+                "id=" + id +
+                ", roomNumber=" + roomNumber +
+                ", maxCapacity=" + maxCapacity +
+                ", pricePerNight=" + pricePerNight +
+                ", hasJakuzzi=" + hasJakuzzi +
+                ", hasSauna=" + hasSauna +
+                ", bookingList=" + bookingList +
+                '}';
     }
 }

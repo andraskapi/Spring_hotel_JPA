@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Guest</title>
+</head>
+<body>
+<a th:href="@{/home}">Home</a>
+
+<form th:action="@{/guest/new}" method="post">
+    <input type="text" placeholder="e.g. Mr" th:field="*{guest.title}">
+    <input type="text" placeholder="e.g. Smith" th:field="*{guest.lastName}">
+    <input type="text" placeholder="e.g. John" th:field="*{guest.firstName}">
+    <input type="text" placeholder="e.g. Budapest" th:field="*{guest.placeOfBirth}">
+    <input type="date" placeholder="e.g. 1999-01-01" th:field="*{guest.dateOfBirth}">
+    <input type="text" placeholder="e.g. ABBP1234" th:field="*{guest.identificationNumber}">
+    <input type="text" placeholder="e.g. example@email.com" th:field="*{guest.email}">
+    <button type="submit">OK</button>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Guest</title>
+</head>
+<body>
+<a th:href="@{/home}">Home</a>
+<table>
+  <thead>
+  <tr>
+    <td>Name</td>
+    <td>BirthPlace</td>
+    <td>BirthDate</td>
+    <td>identification</td>
+    <td>email</td>
+  </tr>
+  </thead>
+  <tr>
+    <td th:text="${guest.title} + '' + ${guest.lastName} + '' + ${guest.firstName}"></td>
+    <td th:text="${guest.placeOfBirth}"></td>
+    <td th:text="${guest.dateOfBirth}"></td>
+    <td th:text="${guest.identificationNumber}"></td>
+    <td th:text="${guest.email}"></td>
+
+  </tr>
+</table>
+
+</body>
+</html>

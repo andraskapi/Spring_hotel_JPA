@@ -1,7 +1,7 @@
 package hu.progmataic.hotel_jpa.service;
 
 import hu.progmataic.hotel_jpa.model.Guest;
-import hu.progmataic.hotel_jpa.repository.GuestRepository;
+import hu.progmataic.hotel_jpa.repository.GuestRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,10 +10,10 @@ import java.util.List;
 @Service
 public class GuestService {
 
-    private final GuestRepository guestRepository;
+    private final GuestRepo guestRepository;
 
     @Autowired
-    public GuestService(GuestRepository guestRepository) {
+    public GuestService(GuestRepo guestRepository) {
         this.guestRepository = guestRepository;
     }
 
@@ -35,20 +35,20 @@ public class GuestService {
         if (guest.getTitle() != null) {
             guestToBeUpdated.setTitle(guest.getTitle());
         }
-        if (guest.getFamily_name() != null) {
-            guestToBeUpdated.setFamily_name(guest.getFamily_name());
+        if (guest.getLastName() != null) {
+            guestToBeUpdated.setLastName(guest.getLastName());
         }
-        if(guest.getFirst_name() != null) {
-            guestToBeUpdated.setFirst_name(guest.getFirst_name());
+        if(guest.getFirstName() != null) {
+            guestToBeUpdated.setFirstName(guest.getFirstName());
         }
-        if (guest.getPlace_of_birth() != null) {
-            guestToBeUpdated.setPlace_of_birth(guest.getPlace_of_birth());
+        if (guest.getPlaceOfBirth() != null) {
+            guestToBeUpdated.setPlaceOfBirth(guest.getPlaceOfBirth());
         }
-        if (guest.getDate_of_birth() != null) {
-            guestToBeUpdated.setDate_of_birth(guest.getDate_of_birth());
+        if (guest.getDateOfBirth() != null) {
+            guestToBeUpdated.setDateOfBirth(guest.getDateOfBirth());
         }
-        if (guest.getIdentification_number() != null) {
-            guestToBeUpdated.setIdentification_number(guest.getIdentification_number());
+        if (guest.getIdentificationNumber() != null) {
+            guestToBeUpdated.setIdentificationNumber(guest.getIdentificationNumber());
         }
         if (guest.getEmail() != null) {
             guestToBeUpdated.setEmail(guest.getEmail());

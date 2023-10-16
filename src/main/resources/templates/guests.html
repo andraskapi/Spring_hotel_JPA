@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Guests</title>
+</head>
+<body>
+<a th:href="@{/home}">Home</a>
+<table>
+    <thead>
+    <tr>
+        <td>Name</td>
+        <td>BirthPlace</td>
+        <td>BirthDate</td>
+        <td>identification</td>
+        <td>email</td>
+    </tr>
+    </thead>
+    <tr th:each="guest : ${guests}">
+
+        <td th:text="${guest.title} + '' + ${guest.lastName} + '' + ${guest.firstName}"></td>
+        <td th:text="${guest.placeOfBirth}"></td>
+        <td th:text="${guest.dateOfBirth}"></td>
+        <td th:text="${guest.identificationNumber}"></td>
+        <td th:text="${guest.email}"></td>
+        <td>
+            <a th:href="@{'/guest/' + ${guest.id}}">
+                <p>Show</p>
+            </a>
+        </td>
+
+    </tr>
+</table>
+<a th:href="@{/guest/new}" >NEW</a>
+
+</body>
+</html>

@@ -1,35 +1,47 @@
 package hu.progmataic.hotel_jpa.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
-    public class Guest {
+public class Guest {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String title;
-    private String family_name;
-    private String first_name;
-    private String place_of_birth;
-    @JsonFormat(pattern="yyyy-MM-dd")
-    private Date date_of_birth;
-    private String identification_number;
+    @Column(name = "last_name")
+    private String lastName;
+    @Column(name = "first_name")
+    private String firstName;
+    @Column(name = "place_of_birth")
+    private String placeOfBirth;
+    @Column(name = "date_of_birth")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dateOfBirth;
+    @Column(name = "identification_number")
+    private String identificationNumber;
     private String email;
+//    @OneToMany(mappedBy = "guest")
+//    @JsonManagedReference
+//    private List<Booking> bookingList = new ArrayList<>();
 
-    public Guest(Integer id, String title, String family_name, String first_name,
-                 String place_of_birth, Date date_of_birth,
-                 String identification_number, String email) {
+
+    public Guest(Integer id, String title, String lastName, String firstName, String placeOfBirth,
+                 LocalDate dateOfBirth, String identificationNumber, String email) {
         this.id = id;
         this.title = title;
-        this.family_name = family_name;
-        this.first_name = first_name;
-        this.place_of_birth = place_of_birth;
-        this.date_of_birth = date_of_birth;
-        this.identification_number = identification_number;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.placeOfBirth = placeOfBirth;
+        this.dateOfBirth = dateOfBirth;
+        this.identificationNumber = identificationNumber;
         this.email = email;
     }
 
@@ -52,44 +64,44 @@ import java.util.Date;
         this.title = title;
     }
 
-    public String getFamily_name() {
-        return family_name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setFamily_name(String family_name) {
-        this.family_name = family_name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getPlace_of_birth() {
-        return place_of_birth;
+    public String getPlaceOfBirth() {
+        return placeOfBirth;
     }
 
-    public void setPlace_of_birth(String place_of_birth) {
-        this.place_of_birth = place_of_birth;
+    public void setPlaceOfBirth(String placeOfBirth) {
+        this.placeOfBirth = placeOfBirth;
     }
 
-    public Date getDate_of_birth() {
-        return date_of_birth;
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setDate_of_birth(Date date_of_birth) {
-        this.date_of_birth = date_of_birth;
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
-    public String getIdentification_number() {
-        return identification_number;
+    public String getIdentificationNumber() {
+        return identificationNumber;
     }
 
-    public void setIdentification_number(String identification_number) {
-        this.identification_number = identification_number;
+    public void setIdentificationNumber(String identificationNumber) {
+        this.identificationNumber = identificationNumber;
     }
 
     public String getEmail() {
@@ -98,5 +110,19 @@ import java.util.Date;
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "Guest{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", placeOfBirth='" + placeOfBirth + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", identificationNumber='" + identificationNumber + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }

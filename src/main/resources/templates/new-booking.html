@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Booking</title>
+</head>
+<body>
+
+<form th:action="@{/booking/new}" method="post" th:object="${booking}">
+
+    <label for="room">Szoba:</label>
+    <select id="room" name="room.id">
+        <option th:each="room : ${rooms}" th:value="${room.id}" th:text="${room.roomNumber}"></option>
+    </select>
+
+    <label for="guest">Vendég:</label>
+    <select id="guest" name="guest.id">
+        <option th:each="guest : ${guests}" th:value="${guest.id}" th:text="${guest.title} + ' ' + ${guest.firstName} + ' ' + ${guest.lastName}"></option>
+    </select>
+
+    <input type="hidden" id="startDate" name="startDate" th:value="${booking.checkIn}" />
+    <input type="hidden" id="endDate" name="endDate" th:value="${booking.checkOut}" />
+    <input type="hidden" id="guestNumber" name="guestNumber" th:value="${booking.numberOfGuest}" />
+
+
+    <button type="submit">OK</button>
+</form>
+
+
+</body>
+</html>
